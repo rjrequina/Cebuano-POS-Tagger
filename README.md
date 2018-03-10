@@ -8,4 +8,3 @@ A Rule-Based Cebuano POS Tagger Using Constraint-Based Grammar
 
 * Make sure the Python version is 2.x
 * Run `pip install -r requirements.txt` in terminal
- 
