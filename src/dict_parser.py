@@ -12,9 +12,7 @@ Parse dictionary into following format:
 word tag1 tag2
 '''
 def parse_raw():
-    # write_file('files/pos-dictionary-parsed.txt', contents=[''], no_encode=True, add_newline=False, mode='w')
-
-    contents = read_file('../data/dict/raw.txt')
+    contents = read_file('data/dict/raw.txt')
     printable = set(string.printable)
     english_vocab = set(w.lower() for w in nltk.corpus.words.words())
     new_entry = True
@@ -118,14 +116,14 @@ def parse_raw():
                 entries.append(alternative_entry)
             dict_entry = ''
 
-    write_file('../data/dict/cebposdict-1.txt', contents=entries, no_encode=True, add_newline=False)
-    print('Status: Finished!')
+    write_file('data/dict/cebposdict-1.txt', contents=entries, no_encode=True, add_newline=False)
+    print('parse_raw: Finished!')
 
 '''
 Remove entries with no POS tags
 '''
 def remove_no_pos_tags():
-    entries = read_file('../data/dict/cebposdict-1.txt')
+    entries = read_file('data/dict/cebposdict-1.txt')
     no_tags = []
     others = []
 
@@ -137,16 +135,14 @@ def remove_no_pos_tags():
         else:
             others.append(entry)
 
-    print('Status: Finished!')
-    print('Entries with no tags: ' + str(len(no_tags)))
-    write_file('files/pos-dictionary-no-tags-1.txt',contents=no_tags, no_encode=True, add_newline=False, mode='w')
-    write_file('files/pos-dictionary-filtered.txt', contents=others, no_encode=True, add_newline=False, mode='w')
+    write_file('data/dict/cebposdict-2.txt', contents=others, no_encode=True, add_newline=False, mode='w')
+    print('remove_no_pos_tags: Finished!')
 
 '''
 Resolve duplicate entries
 '''
 def resolve_duplicate_entries():
-    entries = read_file('files/pos-dictionary-filtered.txt')
+    entries = read_file('data/dict/cebposdict-2.txt')
     result = {}
 
     for outer_idx, entry in enumerate(entries):
@@ -158,18 +154,16 @@ def resolve_duplicate_entries():
         else:
             value = " ".join(list(words[1:]))
             result[words[0]] = result[words[0]] + ' ' + value
-
-    print('Status: Finished!')
-    write_file('files/pos-dictionary-no-duplicate-entries.txt', contents=sorted(result.values()), add_newline=False, append_newline=True)
-
+    
+    write_file('data/dict/cebposdict-3.txt', contents=sorted(result.values()), add_newline=False, append_newline=True)
+    print('resolve_duplicate_entries: Finished!')
 
 '''
 Resolves = in entries
 '''
 def resolve_equals():
-    write_file('files/pos-dictionary-no-equals.txt', contents=[''], no_encode=True, add_newline=False, mode='w')
-    entries = read_file('files/pos-dictionary-no-duplicate-entries.txt')
-    entries = transform_to_dict(entries)
+    write_file('data/dict/cebposdict-4.txt', contents=[''], no_encode=True, add_newline=False, mode='w')
+    entries = read_file('data/dict/cebposdict-3.txt', dict_format=True)
     result = []
     for key, value in entries.iteritems():
 
@@ -191,15 +185,16 @@ def resolve_equals():
                         new_entry.append(word + ' ')
 
         new_entry.append('\n')
-        write_file('files/pos-dictionary-no-equals.txt', contents=new_entry, add_newline=False, mode='a')
+        write_file('data/dict/cebposdict-4.txt', contents=new_entry, add_newline=False, mode='a')
         new_entry = []
 
-    print('Status: Finished!')
+    print('resolve_equals: Finished!')
+
 '''
 Remove entries with no POS tags phase 2
 '''
 def remove_no_pos_tags_2():
-    entries = read_file('files/pos-dictionary-no-equals.txt')
+    entries = read_file('data/dict/cebposdict-4.txt')
     no_tags = []
     others = []
 
@@ -211,19 +206,15 @@ def remove_no_pos_tags_2():
         else:
             others.append(entry)
 
-    print('Status: Finished!')
-    print('Entries with no tags: ' + str(len(no_tags)))
-    write_file('files/pos-dictionary-no-tags-2.txt', contents=sorted(no_tags), add_newline=False, mode='w')
-    write_file('files/pos-dictionary-filtered-2.txt', contents=sorted(others), add_newline=False, mode='w')
-
+    write_file('data/dict/cebposdict-5.txt', contents=sorted(others), add_newline=False, mode='w')
+    print('remove_no_pos_tags_2: Finished!')
 
 '''
 Resolve duplicate tags per entry
 '''
 def resolve_duplicate_tags():
-    write_file('files/pos-dictionary-non-corrected.txt', contents=[''], no_encode=True, add_newline=False, mode='w')
-    entries = read_file('files/pos-dictionary-filtered-2.txt')
-    entries = transform_to_dict(entries)
+    write_file('data/dict/cebposdict-nc.txt', contents=[''], no_encode=True, add_newline=False, mode='w')
+    entries = read_file('data/dict/cebposdict-5.txt', dict_format=True, strip=True)
     result = []
     new_entry = []
     contents = []
@@ -233,7 +224,20 @@ def resolve_duplicate_tags():
         new_entry.append(' '.join(value))
         new_entry.append('\n')
         contents.append(new_entry)
-        write_file('files/pos-dictionary-non-corrected.txt', contents=new_entry, add_newline=False, mode='a')
+        write_file('data/dict/cebposdict-nc.txt', contents=new_entry, add_newline=False, mode='a')
         new_entry = []
 
-    print('Status: Finished!')
+    print('resolve_duplicate_tags: Finished!')
+
+
+def main():
+    parse_raw()
+    remove_no_pos_tags()
+    resolve_duplicate_entries()
+    resolve_equals()
+    remove_no_pos_tags_2()
+    resolve_duplicate_tags()
+
+
+if __name__== "__main__":
+    main()
