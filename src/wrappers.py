@@ -38,39 +38,46 @@ class Word:
 
 '''
 Wrapper for each contextual rule
+
+Operator:
+
+'=!!' indicates that the target reading is the correct one if and only if all context conditions are satisfied; all other readings should be discarded. If the context conditions are not satisfied, the target reading itself is discarded.
+
+'=!' indicates that the target reading is the correct one if and only if all context conditions are satisfied, all other readings are discarded.
+
+'=0' indicates that the target reading will be discarded if and only of the context conditions are satisfied, it leaves all other readings.
 '''
 class ContextualRule:
-    def __init__(self, operator='=0', target=None, context_conditions=[]):
-        self.operator = operator
-        self.target = target
+    def __init__(self):
+        self.operator = '=!!'
+        self.target = None
         self.context_conditions = []
 
     def __str__(self):
         rule = ''
         rule = rule + '( Target: ' + self.target + ', '
-        rule = rule + 'Operator: ' + self.operator
-        rule = rule + ', '.join(self.context_conditions) + ' )'
+        rule = rule + 'Operator: ' + self.operator + ' )'
         return rule
 '''
 Wrapper for each lexical rule
 '''
 class LexicalRule:
-    def __init__(self, target=None, base=[], prefix=None, suffix=None, infix=None):
-        self.target = target
-        self.base = base
-        self.prefix = prefix
-        self.suffix = suffix
-        self.infix = infix
+    def __init__(self):
+        self.target = None
+        self.base = []
+        self.prefix = None
+        self.suffix = None
+        self.infix = None
 
 '''
 Wrapper for each context condition
 '''
 class ContextCondition:
-    def __init__(self, polarity=None, position=0, pos_tag=None, careful_mode=False):
-        self.polarity = polarity
-        self.position = position
-        self.pos_tag = pos_tag
-        self.careful_mode = careful_mode
+    def __init__(self):
+        self.polarity = None
+        self.position = 0
+        self.pos_tag = None
+        self.careful_mode = False
 
     def __str__(self):
         condition = ''
