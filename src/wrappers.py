@@ -1,40 +1,40 @@
 '''
-Wrapper for stems of a word
-'''
-class Stem:
-    def __init__(self, word=None, root=None, prefix=None, suffix=None, infix=None):
-        self.word = word
-        self.root = word
-        self.prefix = prefix
-        self.infix = infix
-        self.suffix = suffix
-        self.is_entry = False
+Wrapper for each word with its properties
 
-    def __str__(self):
-        contents = ''
-        contents = contents + 'Word: ' + self.word + '\n'
-        contents = contents + 'Root: ' + str(self.root) + '\n'
-        contents = contents + 'Prefix: ' + str(self.prefix) + '\n'
-        contents = contents + 'Infix: ' + str(self.infix) + '\n'
-        contents = contents + 'Suffix: ' + str(self.suffix) + '\n'
-        contents = contents + 'Dictionary Entry: ' + str(self.is_entry) + '\n'
-
-        return contents
-
-
-'''
-Wrapper for each word with their stems and pos tags
+Properties:
+    root_tags = tags of the word from the dictionary
+    derived_tags = tags of the word from lexical rules
+    is_close = boolean to check if the current word is a function word
+    pos_tags = tag/s of the word
+    text = the word itself (string)
+    prefix = prefix of the word
+    infix = infix of the word
+    suffix = suffix of the word
+    root = root of the word
+    is_entry = boolean to check if the current is a dictionary entry
 '''
 class Word:
-    def __init__(self, stem=None, pos_tags=[], word=''):
-        self.stem = stem
+    def __init__(self, text=None):
         self.pos_tags = []
         self.root_tags = []
         self.derived_tags = []
         self.is_close = False
-        self.word = word
-        self.orig_word = word
+        self.text = text
+        self.prefix = None
+        self.infix = None
+        self.suffix = None
+        self.root = None
+        self.is_entry = False
 
+
+    def to_lower():
+        if self.text:
+            return self.text.lower()
+        
+        return self.text
+
+    def __str__(self):
+        return self.text + '/' + str(self.pos_tags)
 
 '''
 Wrapper for each contextual rule
@@ -55,8 +55,7 @@ class ContextualRule:
 Wrapper for each lexical rule
 '''
 class LexicalRule:
-    def __init__(self, word=None, target=None, base=[], prefix=None, suffix=None, infix=None):
-        self.word = word
+    def __init__(self, target=None, base=[], prefix=None, suffix=None, infix=None):
         self.target = target
         self.base = base
         self.prefix = prefix
