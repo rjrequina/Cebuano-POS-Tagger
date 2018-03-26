@@ -23,14 +23,14 @@ class Word:
         self.prefix = None
         self.infix = None
         self.suffix = None
-        self.root = None
+        self.root = text
         self.is_entry = False
 
 
     def to_lower():
         if self.text:
             return self.text.lower()
-        
+
         return self.text
 
     def __str__(self):
