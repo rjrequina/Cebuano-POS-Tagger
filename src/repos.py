@@ -6,7 +6,7 @@ from wrappers import LexicalRule, ContextualRule, ContextCondition
 Fetch dictionary
 '''
 def dictionary():
-	return read_file('../data/dict/cebposdict.txt', dict_format=True)
+	return read_file('../data/dict/cebposdict.txt', dict_format=True, strip=True)
 
 '''
 Fetch prefixes
@@ -25,13 +25,20 @@ Fetch function words
 '''
 def function_words():
 	tags = ['CONJ', 'DET', 'PART', 'PRON']
-	function_words = []
+	function_words = {}
 
 	for tag in tags:
 		words = read_file('../data/function_words/' + tag + '.txt', strip=True)
-		function_words += words
 
-	return list(set(function_words))
+		for word in words:
+			if word not in function_words:
+				function_words[word] = [tag]
+			else:
+				function_words[word].append(tag)
+
+		# function_words += words
+
+	return function_words
 
 '''
 Fetch lexical rules

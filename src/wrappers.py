@@ -23,7 +23,7 @@ class Word:
         self.prefix = None
         self.infix = None
         self.suffix = None
-        self.root = text
+        self.root = text.lower() if text is not None else text
         self.is_entry = False
 
 
