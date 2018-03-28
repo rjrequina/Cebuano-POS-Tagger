@@ -8,7 +8,7 @@ import string
 Tokenize the sentences
 '''
 def tokenize():
-    sentences = read_file('../data/test/stemmer/sentences.txt', strip=True)
+    sentences = read_file('data/test/stemmer/sentences.txt', strip=True)
 
     tokens = []
     english_corpus = english_words.words()
@@ -36,14 +36,14 @@ def tokenize():
                 if word not in tokens:
                     tokens.append(word)
 
-    write_file(name='../data/test/stemmer/input_tokens.txt', contents=tokens, no_encode=True, append_newline=True, add_newline=False)
+    write_file(name='data/test/stemmer/input_tokens.txt', contents=tokens, no_encode=True, append_newline=True, add_newline=False)
 
 '''
 Feeds the input tokens in stemmer
 The output is: word, root word, prefix, infix, suffix, dictionary_entry
 '''
 def stem_tokens():
-    tokens = read_file('../data/test/stemmer/input_tokens.txt', strip=True)
+    tokens = read_file('data/test/stemmer/input_tokens.txt', strip=True)
     output = []
     for idx, token in enumerate(tokens):
         print(idx)
@@ -52,13 +52,13 @@ def stem_tokens():
         is_entry = 1 if stem.is_entry else 0
         output.append(stem.word + ' ' + stem.root + ' ' + affix + ' ' + str(is_entry))
 
-    write_file(name='../data/test/stemmer/output_tokens-nc.txt', contents=output, no_encode=True, append_newline=True, add_newline=False)
+    write_file(name='data/test/stemmer/output_tokens-nc.txt', contents=output, no_encode=True, append_newline=True, add_newline=False)
 
 '''
 Formats the output tokens to dict
 '''
 def to_panda_data():
-    output = read_file('../data/test/stemmer/output_tokens.txt', strip=True)
+    output = read_file('data/test/stemmer/output_tokens.txt', strip=True)
     panda_data = []
     indexes = []
     for o in output:
@@ -89,3 +89,8 @@ def to_panda_data():
      'data': panda_data,
      'index': indexes
     }
+
+if __name__ == '__main__':
+    # tokenize()
+    # stem_tokens()
+    pass

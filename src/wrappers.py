@@ -19,7 +19,8 @@ class Word:
         self.root_tags = []
         self.derived_tags = []
         self.is_close = False
-        self.text = text
+        self.orig_text = text
+        self.text = text.lower() if text is not None else text
         self.prefix = None
         self.infix = None
         self.suffix = None
@@ -36,6 +37,13 @@ class Word:
     def __str__(self):
         return self.text + '/' + str(self.pos_tags)
 
+    def print_stem_results(self):
+        pref = self.prefix if self.prefix else '-'
+        inf = self.infix if self.infix else '-'
+        suff = self.suffix if self.suffix else '-'
+
+        text = self.text + ':[(' + str(self.root) +  '), {' + pref + ',' + inf + ',' + suff + '}]'   
+        return text 
 '''
 Wrapper for each contextual rule
 

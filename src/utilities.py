@@ -1,50 +1,72 @@
+import sys
+import os
+
 '''
 Write contents to file
 Default is per_line and mode is 'w'
 '''
 def write_file(name=None, contents=[], per_line=True, mode="w", add_newline=True, no_encode=False, append_newline=False):
-    f = open(name, mode)
-    string = ""
-    for content in contents:
-        if append_newline:
-            content = content + '\n'
-        if per_line:
-            if no_encode:
-                f.write(content)
+    if name:
+        cwd = os.getcwd()
+        if '/src' in cwd:
+            cwd = cwd.replace('/src', '')
+        
+        name = cwd + '/' + name
+        sys.path.insert(0, name)
+
+        f = open(name, mode)
+        string = ""
+        for content in contents:
+            if append_newline:
+                content = content + '\n'
+            if per_line:
+                if no_encode:
+                    f.write(content)
+                else:
+                    f.write(content.encode('utf-8'))
+                if add_newline:
+                    f.write("\n")
             else:
-                f.write(content.encode('utf-8'))
-            if add_newline:
-                f.write("\n")
-        else:
-            string = string + content
+                string = string + content
 
-    if not per_line:
-        f.write(string)
+        if not per_line:
+            f.write(string)
 
-    f.close()
+        f.close()
+    
+    return None
 
 '''
 Returns contents of a file
 Can specify start and end of contents in reading a file
 '''
 def read_file(name=None, start=None, end=None, strip=False, dict_format=False, decode=False):
-    f = open(name, "r")
-    contents = []
-    dictionary = {}
-    for line in f:
-        if strip:
-            line = line.strip()
-        splitted = line.split(" ")
-        dictionary[splitted[0]] = splitted[1:]
-        if decode:
-            line = line.decode('utf-8')
-        contents.append(line)
+    if name:
+        cwd = os.getcwd()
+        if '/src' in cwd:
+            cwd = cwd.replace('/src', '')
+        
+        name = cwd + '/' + name
+        sys.path.insert(0, name)
 
-    f.close()
-    if start is not None:
-        contents = contents[start:]
+        f = open(name, "r")
+        contents = []
+        dictionary = {}
+        for line in f:
+            if strip:
+                line = line.strip()
+            splitted = line.split(" ")
+            dictionary[splitted[0]] = splitted[1:]
+            if decode:
+                line = line.decode('utf-8')
+            contents.append(line)
 
-    if dict_format:
-        return dictionary
+        f.close()
+        if start is not None:
+            contents = contents[start:]
 
-    return contents
+        if dict_format:
+            return dictionary
+
+        return contents
+    return None

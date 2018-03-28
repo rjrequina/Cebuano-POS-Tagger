@@ -4,8 +4,12 @@ import time
 
 from wrappers import Word
 from search import search_term
-from repos import suffixes, prefixes, function_words
+from repos import suffixes, prefixes, function_words, dictionary
 
+entries = dictionary()
+prefs = prefixes()
+suffs = suffixes()
+func_words = function_words()
 
 '''
 Given a word, stems the word and returns the root and affixes of the word
@@ -86,7 +90,7 @@ def strip_prefix(stem=None):
     word = stem.root
     word = ''.join([i for i in word if i.isalpha()])
 
-    for prefix in prefixes():
+    for prefix in prefs:
         if word.startswith(prefix):
             if not longest_prefix:
                 longest_prefix = prefix
@@ -183,7 +187,7 @@ def lookup(stem=None):
     entry = stem.root.lower().replace('o', 'u')
     entry = entry.replace('e', 'i')
 
-    if entry in function_words() or search_term(term=stem.root):
+    if entry in func_words or search_term(entries=entries, term=stem.root):
         stem.is_entry = True
         return stem
     else:
@@ -194,7 +198,7 @@ def lookup(stem=None):
 Checks if the root is an affix
 '''
 def affix_lookup(stem=None):
-    if stem.root in prefixes() or stem.root in suffixes():
+    if stem.root in prefs or stem.root in suffs:
         stem.is_entry = True
         return stem
 
@@ -202,10 +206,9 @@ def affix_lookup(stem=None):
 
 
 if __name__ == "__main__":
-    # start = int(round(time.time() * 1000))
-    # stem = stem_word(word='pagkabuang-buang')
-    # print(stem.root)
-    # print(stem.prefix)
-    # end = int(round(time.time() * 1000))
-    # print(end - start)
+    start = int(round(time.time() * 1000))
+    stem = stem_word(word='niadtong')
+    print(stem.root)
+    end = int(round(time.time() * 1000))
+    print(end - start)
     pass

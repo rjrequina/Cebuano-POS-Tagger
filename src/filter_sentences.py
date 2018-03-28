@@ -15,8 +15,8 @@ def filter_cebuano_sentences():
         print("Status: Finished!")
         return
 
-    sentences = read_file("../data/scraped/news-raw-nc.txt", start=start)
-    write_file("../data/scraped/news-raw-nc.txt", contents=[''], mode="w", add_newline=False, no_encode=True)
+    sentences = read_file("data/scraped/news-raw-nc.txt", start=start)
+    write_file("data/scraped/news-raw-nc.txt", contents=[''], mode="w", add_newline=False, no_encode=True)
 
     for sentence in sentences:
         start += 1
@@ -30,9 +30,9 @@ def filter_cebuano_sentences():
                     break
 
         if is_cebuano:
-            write_file("../data/scraped/news-raw-nc.txt", contents=[sentence], mode="a", add_newline=False, no_encode=True)
+            write_file("data/scraped/news-raw-nc.txt", contents=[sentence], mode="a", add_newline=False, no_encode=True)
 
-        write_file("../data/scraped/cp/news-raw-cp.txt", contents=[str(start + 1)], mode="w")
+        write_file("data/scraped/cp/news-raw-cp.txt", contents=[str(start + 1)], mode="w")
         print("Sentence [" + str(start) + "]: OK")
 
 

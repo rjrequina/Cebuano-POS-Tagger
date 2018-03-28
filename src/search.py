@@ -1,14 +1,11 @@
 import string
 from utilities import read_file
-from repos import dictionary
 
 
 '''
 Search term in dictionary
 '''
-def search_term(term=''):
-	entries = dictionary()
-
+def search_term(entries={}, term=''):
 	term = term.lower()
 	if term not in entries:
 		term = string.replace(term, 'o', 'u')

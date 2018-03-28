@@ -4,6 +4,7 @@ from polyglot.text import Text
 from utilities import read_file, write_file
 from wrappers import Word
 from stemmer import stem_word
+import stemmer
 from search import search_term
 from repos import dictionary, prefixes, suffixes, function_words, lexical_rules, contextual_rules
 
@@ -69,7 +70,7 @@ Assign possible tags helper function: Dictionary Search
 '''
 def dictionary_search(word=None):
     if word.is_entry:
-        pos_tags = search_term(term=word.root)
+        pos_tags = search_term(entries=stemmer.entries, term=word.root)
         if pos_tags:
             pos_tags = [tag for tag in pos_tags if tag != 'OTH']
             pos_tags = ['PART' if tag == 'PREP' else tag for tag in pos_tags]
@@ -124,7 +125,7 @@ Assign NOUN if capitalized
 '''
 def apply_capitalization_assignment(word=None):
     if len(word.pos_tags) == 0:
-        if word.text[0].isupper():
+        if word.orig_text[0].isupper():
             word.pos_tags = ['NOUN']
 
     return word

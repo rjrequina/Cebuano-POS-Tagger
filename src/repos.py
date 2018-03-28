@@ -6,19 +6,19 @@ from wrappers import LexicalRule, ContextualRule, ContextCondition
 Fetch dictionary
 '''
 def dictionary():
-	return read_file('../data/dict/cebposdict.txt', dict_format=True, strip=True)
+	return read_file('data/dict/cebposdict.txt', dict_format=True, strip=True)
 
 '''
 Fetch prefixes
 '''
 def prefixes():
-	return read_file('../data/affixes/PREF.txt', strip=True)
+	return read_file('data/affixes/PREF.txt', strip=True)
 
 '''
 Fetch suffixes
 '''
 def suffixes():
-	return read_file('../data/affixes/SUFF.txt', strip=True)
+	return read_file('data/affixes/SUFF.txt', strip=True)
 
 '''
 Fetch function words
@@ -28,7 +28,7 @@ def function_words():
 	function_words = {}
 
 	for tag in tags:
-		words = read_file('../data/function_words/' + tag + '.txt', strip=True)
+		words = read_file('data/function_words/' + tag + '.txt', strip=True)
 
 		for word in words:
 			if word not in function_words:
@@ -44,7 +44,7 @@ def function_words():
 Fetch lexical rules
 '''
 def lexical_rules():
-	raw = read_file('../data/rules/LEXICAL.txt', strip=True)
+	raw = read_file('data/rules/LEXICAL.txt', strip=True)
 	rules = []
 
 	for r in raw:
@@ -67,7 +67,7 @@ def lexical_rules():
 Fetch contextual rules
 '''
 def contextual_rules():
-	raw = read_file('../data/rules/CONTEXTUAL.txt', strip=True)
+	raw = read_file('data/rules/CONTEXTUAL.txt', strip=True)
 	rules = []
 
 	for r in raw:
