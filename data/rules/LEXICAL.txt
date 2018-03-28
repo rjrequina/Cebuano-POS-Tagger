@@ -1,41 +1,44 @@
-ADJ - - on NOUN
-ADJ - - on NOUN ADJ
-ADJ - - on VERB
-ADJ - in - NOUN
-ADJ gi - on ADJ
-ADJ ma - on VERB
-ADV inigka - - NOUN
-ADV ka - - NOUN
-ADV ka - - NUM
-ADV kada - - NOUN VERB
-NOUN - - an NOUN VERB
-NOUN - - anan NOUN VERB
-NOUN - - dor VERB
-NOUN - - era NOUN VERB
-NOUN - - ero NOUN VERB
-NOUN - - han NOUN VERB
-NOUN - - on VERB
-NOUN - - or VERB
-NOUN - in - VERB
-NOUN - in an VERB
-NOUN - um -
-NOUN hi - - VERB
-NOUN isigka - - NOUN
-NOUN ka - - VERB
-NOUN ka - an NOUN
-NOUN ka - on NOUN
-NOUN mag - - NOUN VERB
-NOUN man - - VERB
-NOUN mang - - VERB
-NOUN pag - - VERB
-NOUN pagka - - NOUN VERB
-NOUN tag - - VERB
-NOUN taga - - NOUN
-NOUN tig - - VERB
-NOUN ting - - NOUN VERB
-VERB gi - -
-VERB gihi - an VERB
-VERB ika - - VERB
-VERB man - - VERB
-VERB nihi - k VERB
-VERB ni - -
+VERB - - a 
+VERB - - an VERB
+ADJ - - an ADJ
+NOUN - - anan 
+ADJ - - dor
+NOUN - - era
+NOUN - - ero
+VERB - - han 
+VERB - - hon 
+VERB - - i
+NOUN - in - 
+NOUN - in an
+VERB - - on VERB
+ADJ  - - on VERB
+ADJ - - or
+VERB gi - - 
+VERB gi - an 
+NOUN gi - on 
+NOUN hi - -
+VERB i - -
+NOUN ika - - 
+NOUN isigka - - 
+NOUN ka - -
+ADJ ka - an 
+VERB ka - i 
+NOUN ka - on 
+ADV kada - -
+VERB ma - -
+VERB mag - - 
+VERB maka - - 
+VERB mo - - 
+VERB na - - 
+VERB na - - 
+VERB nag - - 
+VERB naka - - 
+NOUN pag - - 
+NOUN pagka - - 
+ADJ pala - - 
+ADJ pinaka - - 
+NOUN tag - - 
+NOUN taga - - 
+NOUN tig - - 
+NOUN ting - - 
+PRON ni - - VERB

@@ -15,7 +15,7 @@ Given a Cebuano sentence, it will tag all words with its corresponding POS tags
 def tag_sentence(text=''):
     tokens = tokenize(text=text)
     words = assign_pos_tags(tokens=tokens)
-    # words = disambiguate_pos_tags(words=words)
+    words = disambiguate_pos_tags(words=words)
 
     return words
 
@@ -135,7 +135,7 @@ Disambiguate multiple POS tags
 '''
 def disambiguate_pos_tags(words=None):
     words = apply_lexical_disambiguation(words=words)
-    words = apply_contextual_disambiguation(words=words)
+    # words = apply_contextual_disambiguation(words=words)
 
     return words
 
@@ -144,36 +144,36 @@ def disambiguate_pos_tags(words=None):
 Lexical Disambiguation
 '''
 def apply_lexical_disambiguation(words=None):
-    open_tags = ['NOUN', 'ADJ', 'VERB', 'NUM']
+    open_tags = ['NOUN', 'ADJ', 'VERB', 'NUM', 'ADV']
 
-    all_lexical_rules = lexical_rules()
+    # all_lexical_rules = lexical_rules()
     for word in words:
         retain_tags = []
         if len(word.pos_tags) > 1:
             # Checks if the word is a function word.
             # If it is, it will remove the open POS tags that belongs to the word
             # If it isn't, it will remove the closed POS tags
-            if word.is_close:
-                word.pos_tags = [item for item in word.pos_tags if item not in open_tags]
-            else:
-                word.pos_tags = [item for item in word.pos_tags if item in open_tags]
+            # if word.is_close:
+            #     word.pos_tags = [item for item in word.pos_tags if item not in open_tags]
+            # else:
+            #     word.pos_tags = [item for item in word.pos_tags if item in open_tags]
 
 
             # Apply lexical rules for open words only
             # Words with these POS tags have affixes attach to them
-            if not word.is_close:
+            # if not word.is_close:
 
-                lexical_rules = select_lexical_rules(word=word)
-                for rule in lexical_rules:
-                    if rule.target in word.pos_tags:
-                        retain_tags.append(rule.target)
+            approp_lexical_rules = select_lexical_rules(word=word)
+            for rule in approp_lexical_rules:
+                if rule.target in word.pos_tags:
+                    retain_tags.append(rule.target)
 
 
-                if len(retain_tags) > 0:
-                    orig_tags = word.pos_tags
-                    word.pos_tags = []
-                    for tag in retain_tags:
-                        word.pos_tags.append(tag)
+            if len(retain_tags) > 0:
+                orig_tags = word.pos_tags
+                word.pos_tags = []
+                for tag in retain_tags:
+                    word.pos_tags.append(tag)
 
     return words
 
