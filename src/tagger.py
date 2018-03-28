@@ -181,13 +181,10 @@ def apply_lexical_disambiguation(words=None):
 Contextual Disambiguation
 '''
 def apply_contextual_disambiguation(words=None):
-    remove_tags = []
     for idx, word in enumerate(words):
         # print(word.stem.word)
         target = contextual_rules[0].target
         is_valid = False
-        curr_idx = contextual_rules[0].context_conditions[0].position
-        pass_position = False
         for rule in contextual_rules():
             if len(word.pos_tags) > 1:
                 if target != rule.target:
