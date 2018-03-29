@@ -104,7 +104,7 @@ def apply_lexical_rules_assignment(word=None):
     is_unknown = len(word.pos_tags) == 0
 
     for rule in all_lexical_rules:
-        intersection = list(set(word.pos_tags).intersection(rule.base))            
+        intersection = list(set(word.pos_tags).intersection(rule.base))
 
         # If the word is unknown
         if is_unknown:
@@ -150,7 +150,7 @@ Disambiguate multiple POS tags
 '''
 def disambiguate_pos_tags(words=None):
     words = apply_lexical_disambiguation(words=words)
-    # words = apply_contextual_disambiguation(words=words)
+    words = apply_contextual_disambiguation(words=words)
 
     return words
 
@@ -169,7 +169,7 @@ def apply_lexical_disambiguation(words=None):
             # Checks if the word is a function word.
             # If it is, it will remove the open POS tags that belongs to the word
             # If it isn't, it will remove the closed POS tags
-            
+
             # if word.is_close:
             #     word.pos_tags = [item for item in word.pos_tags if item not in open_tags]
             # else:
@@ -181,7 +181,7 @@ def apply_lexical_disambiguation(words=None):
             # if not word.is_close:
 
             skip = word.prefix and word.infix and word.suffix
-            
+
             if not skip:
                 approp_lexical_rules = select_lexical_rules(word=word)
                 for rule in approp_lexical_rules:
@@ -203,52 +203,31 @@ Contextual Disambiguation
 '''
 def apply_contextual_disambiguation(words=None):
     for idx, word in enumerate(words):
-        # print(word.stem.word)
-        target = contextual_rules[0].target
-        is_valid = False
-        for rule in contextual_rules():
-            if len(word.pos_tags) > 1:
-                if target != rule.target:
-                    if not is_valid:
-                        # Removes the target pos tag if not valid
-                        # Checks if the number of pos tags of the current word
-                        # is greater than 1 if less than or equal to 1
-                        # will retain the pos tag
-                        if len(word.pos_tags) > 1 and target in word.pos_tags:
-                            word.pos_tags.remove(target)
-                    target = rule.target
-                    is_valid = False
+        if len(word.pos_tags) > 1:
+            approp_rules = select_contextual_rules(word=word)
 
-                if target in word.pos_tags:
-                    for condition in rule.context_conditions:
-                        position = 0
-                        if condition.position != 0:
-                            position = idx + condition.position
+            for rule in approp_rules:
+                if rule.operator == '=!!':
+                    if satisfies_condition(rule=rule, word=word, words=words, curr_pos=idx):
+                        word.pos_tags = [rule.target]
+                    else:
+                        if rule.target in word.pos_tags:
+                            word.pos_tags.remove(rule.target)
+                elif rule.operator == '=!':
+                    if satisfies_condition(rule=rule, word=word, words=words, curr_pos=idx):
+                        word.pos_tags = [rule.target]
+                elif rule.operator == '=0':
+                    if satisfies_condition(rule=rule, word=word, words=words, curr_pos=idx):
+                        if rule.target in word.pos_tags:
+                            word.pos_tags.remove(rule.target)
 
-                            # Checks if the pos tags in the current position is empty
-                            # It means the word is a symbol
-                            other_word = get_word(words=words, position=position)
-                            if other_word:
-                                if len(other_word.pos_tags) == 0:
-                                    if condition.position < 0:
-                                        # Move one step to the left
-                                        position = idx + (condition.position - 1)
-                                    else:
-                                        # Move one step to the right
-                                        position = idx + (condition.position + 1)
-
-                        other_word = get_word(words=words, position=position)
-                        if other_word:
-                            if not condition.pos_tag in other_word.pos_tags:
-                                is_valid = False
-                                break
-                            else:
-                                is_valid = True
+                if len(word.pos_tags) == 1:
+                    break
 
     return words
 
 '''
-Helper function for contextual Disambiguation
+Helper function for Contextual Disambiguation
 Gets the word in the current position
 If None is returned, it means the position is invalid
 '''
@@ -257,6 +236,56 @@ def get_word(words=[], position=-1):
         return words[position]
 
     return None
+
+'''
+Helper function
+Gets a valid position
+A valid position means that the pos tag on that word is not SYM
+'''
+def get_valid_position(words=None, position=-1, curr_pos=-1):
+
+    curr_pos += position
+
+    if curr_pos >= len(words) or curr_pos < 0:
+        return curr_pos
+
+
+    while 'SYM' in words[curr_pos].pos_tags:
+        if position < 0:
+            # Move one step to the left
+            curr_pos = curr_pos + (position - 1)
+        else:
+            # Move one step to the right
+            curr_pos = curr_pos + (position + 1)
+
+        if curr_pos >= len(words) or curr_pos < 0:
+            return curr_pos
+
+    return curr_pos
+'''
+Helper function for Contextual Disambiguation
+Checks if the current word meets the contextual conditions of the rule
+'''
+def satisfies_condition(rule=None, word=None, words=None, curr_pos=-1):
+    for condition in rule.context_conditions:
+        position = get_valid_position(words=words, position=condition.position, curr_pos=curr_pos)
+        context_word = get_word(words=words, position=position)
+
+        if context_word:
+            if condition.careful_mode:
+                if len(context_word.pos_tags) > 1:
+                    return False
+                else:
+                    if condition.pos_tag not in context_word.pos_tags:
+                        return False
+            else:
+                if condition.pos_tag not in context_word.pos_tags:
+                    return False
+
+        else:
+            return False
+
+    return True
 
 
 '''
