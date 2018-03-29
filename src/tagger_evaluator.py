@@ -40,8 +40,8 @@ def tag_test_sentences():
                 else:
                     non_disambiguated_count += 1
 
-            if len(word.pos_tags) > 1:
-                 print(word)
+            # if len(word.pos_tags) > 1:
+            #      print(word)
             # if len(word.pos_tags):
             #     tagged_sentence +=  word.stem.word + "/" + word.pos_tags[0] + " "
             # else:
@@ -88,4 +88,3 @@ def extract_predicted_pos_tags(words=[]):
             predicted_pos_tags.append(word.pos_tags[0])
 
     return predicted_pos_tags
-    
