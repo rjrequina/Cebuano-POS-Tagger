@@ -88,4 +88,3 @@ def extract_predicted_pos_tags(words=[]):
             predicted_pos_tags.append(word.pos_tags[0])
 
     return predicted_pos_tags
-    
