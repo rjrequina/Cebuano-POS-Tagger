@@ -35,15 +35,15 @@ class Word:
         return self.text
 
     def __str__(self):
-        return self.text + '/' + str(self.pos_tags)
+        return self.text.encode('utf-8') + '/' + str(self.pos_tags)
 
     def print_stem_results(self):
         pref = self.prefix if self.prefix else '-'
         inf = self.infix if self.infix else '-'
         suff = self.suffix if self.suffix else '-'
 
-        text = self.text + ':[(' + str(self.root) +  '), {' + pref + ',' + inf + ',' + suff + '}]'   
-        return text 
+        text = self.text + ':[(' + str(self.root) +  '), {' + pref + ',' + inf + ',' + suff + '}]'
+        return text
 '''
 Wrapper for each contextual rule
 
