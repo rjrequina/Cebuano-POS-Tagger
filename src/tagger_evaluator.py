@@ -40,6 +40,8 @@ def tag_test_sentences():
                 else:
                     non_disambiguated_count += 1
 
+            # if 'OTH' in word.pos_tags:
+            #     print(word)
             # if len(word.pos_tags) > 1:
             #      print(word)
             # if len(word.pos_tags):
