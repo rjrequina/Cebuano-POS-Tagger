@@ -50,3 +50,4 @@ ADJ ma - on ADJ
 ADJ - - ng
 VERB nang - -
 VERB nanga - -
+NOUN - - syon
