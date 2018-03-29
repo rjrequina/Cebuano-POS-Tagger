@@ -1,37 +1,25 @@
-VERB - - a
-VERB - - an VERB
-ADJ - - an ADJ
-NOUN - - anan
-ADJ - - dor
-NOUN - - era
-NOUN - - ero
-VERB - - han
-VERB - - hon
-VERB - - i
-NOUN - in -
-NOUN - in an
-VERB - - on VERB
-ADJ  - - on VERB
-ADJ - - or
 VERB gi - -
-VERB gi - an
-NOUN gi - on
 NOUN hi - -
 VERB i - -
 NOUN ika - -
+ADV inigka - - NOUN
 NOUN isigka - -
-NOUN ka - -
-ADJ ka - an
-VERB ka - i
-NOUN ka - on
+ADV ka - - NOUN
+ADV ka - - NUM
+NOUN ka - - VERB
 ADV kada - -
-VERB ma - -
 VERB mag - -
 VERB maka - -
+VERB man - -
+VERB manga - - VERB
 VERB mo - -
 VERB na - -
 VERB nag - -
 VERB naka - -
+VERB nang - -
+VERB nanga - -
+PRON ni - - VERB
+VERB ni - - VERB
 NOUN pag - -
 NOUN pagka - -
 ADJ pala - -
@@ -40,14 +28,38 @@ NOUN tag - -
 NOUN taga - -
 NOUN tig - -
 NOUN ting - -
-PRON ni - - PRON
-VERB ni - - VERB
-ADJ ni - ng VERB
-VERB gi - g VERB
-VERB manga - - VERB
+ADJ - in - NOUN
+NOUN - in - NOUN
+NOUN - um -
+VERB - - a
+ADJ - - an ADJ
+NOUN - - an NOUN VERB
+VERB - - an VERB
+VERB gi - an
+VERB gihi - an VERB
+ADJ ka - an
+NOUN ka - an NOUN
+NOUN - in an
+NOUN - - anan
+ADJ - - dor
+NOUN - - era
+NOUN - - ero
 ADJ - - g ADJ
-ADJ ma - on ADJ
-ADJ - - ng
-VERB nang - -
-VERB nanga - -
+VERB gi - g VERB
+NOUN - - han
+VERB - - han
+VERB - - hon
+VERB - - i
+VERB ka - i
+ADJ  - - ng
+ADJ ni - ng VERB
+ADJ  - - on VERB NOUN ADJ
+NOUN - - on VERB
+VERB - - on VERB
+ADJ gi - on ADJ
+NOUN gi - on NOUN
+NOUN ka - on
+ADJ ma - on ADJ VERB
+ADJ - - or VERB
+NOUN - - or VERB
 NOUN - - syon
