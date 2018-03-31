@@ -46,12 +46,15 @@ Assigns all possible POS tags per token
 '''
 def assign_pos_tags(tokens=[]):
     words = []
-    for token in tokens:
+    for idx, token in enumerate(tokens):
         stem = stem_word(word=token)
         word = dictionary_search(word=stem)
         word = function_words_search(word=stem)
         word = apply_lexical_rules_assignment(word=stem)
-        word = apply_capitalization_assignment(word=stem)
+        word = apply_capitalization_assignment(word=stem, pos=idx)
+
+        if token == 'Manglibre':
+            print(word)
 
         if len(word.pos_tags) == 0:
             if stem.text.isdigit():
@@ -109,6 +112,9 @@ def apply_lexical_rules_assignment(word=None):
     for rule in all_lexical_rules:
         intersection = list(set(word.pos_tags).intersection(rule.base))
 
+        if len(rule.base) == 0:
+            intersection = [1]
+
         # If the word is unknown
         if is_unknown:
             if rule.target not in word.pos_tags:
@@ -141,8 +147,12 @@ def apply_lexical_rules_assignment(word=None):
 '''
 Assign NOUN if capitalized
 '''
-def apply_capitalization_assignment(word=None):
+def apply_capitalization_assignment(word=None, pos=-1):
     if len(word.pos_tags) == 0:
+        if word.orig_text[0].isupper():
+            word.pos_tags = ['NOUN']
+
+    if pos > 0:
         if word.orig_text[0].isupper():
             word.pos_tags = ['NOUN']
 

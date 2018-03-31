@@ -13,6 +13,7 @@ VERB maka - -
 VERB magka - -
 VERB man - -
 VERB manga - - VERB
+VERB mang - -
 VERB mo - -
 VERB na - -
 VERB nag - -
@@ -64,3 +65,5 @@ ADJ ma - on ADJ VERB
 ADJ - - or VERB
 NOUN - - or VERB
 NOUN - - syon
+VERB nahi - -
+VERB gihi - -
