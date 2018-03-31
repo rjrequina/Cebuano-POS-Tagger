@@ -7,7 +7,8 @@ from stemmer import stem_word
 import stemmer
 from search import search_term
 from repos import dictionary, prefixes, suffixes, function_words, lexical_rules, contextual_rules
-
+import enchant
+eng_d = enchant.Dict("en_US")
 
 '''
 Given a Cebuano sentence, it will tag all words with its corresponding POS tags
@@ -58,6 +59,8 @@ def assign_pos_tags(tokens=[]):
                 word.pos_tags = ['NUM']
             elif stem.text in string.punctuation:
                 word.pos_tags = ['SYM']
+            elif eng_d.check(stem.text):
+                word.pos_tags = ['NOUN']
             else:
                 word.pos_tags = ['OTH']
 
@@ -276,10 +279,10 @@ def satisfies_condition(rule=None, word=None, words=None, curr_pos=-1):
                 if len(context_word.pos_tags) > 1:
                     return False
                 else:
-                    if condition.pos_tag not in context_word.pos_tags:
+                    if condition.pos_tag not in context_word.pos_tags or condition.pos_tag != context_word.text:
                         return False
             else:
-                if condition.pos_tag not in context_word.pos_tags:
+                if condition.pos_tag not in context_word.pos_tags or condition.pos_tag != context_word.text:
                     return False
 
         else:

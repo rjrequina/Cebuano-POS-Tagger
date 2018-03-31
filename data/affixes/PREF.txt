@@ -6,6 +6,7 @@ tigpa
 pagka
 panag
 manga
+magka
 ting
 tagi
 taga

@@ -10,6 +10,7 @@ NOUN ka - - VERB
 ADV kada - -
 VERB mag - -
 VERB maka - -
+VERB magka - -
 VERB man - -
 VERB manga - - VERB
 VERB mo - -
