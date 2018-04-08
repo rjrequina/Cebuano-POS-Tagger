@@ -36,6 +36,19 @@ def stem_word(word=None):
 
         ]
 
+        '''
+        processes = [
+            [],
+            ['pref'],
+            ['suff'],
+            ['pref', 'suff'],
+            ['redup'],
+            ['pref', 'redup'],
+            ['suff', 'redup'],
+            ['pref', 'suff', 'redup']
+        ]
+        '''
+
         stem = Word(text=word)
         temp_stem = deepcopy(stem)
         for process in processes:
