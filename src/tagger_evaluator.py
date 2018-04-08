@@ -7,8 +7,11 @@ from tagger import tag_sentence
 Fetches the unlabeled sentences
 '''
 def fetch_unlabeled_sentences():
-    files = ['example-sentences.txt','news-sentences.txt', 'blogs-sentences.txt']
-    files =  ['news-sentences.txt']
+    # files = ['example-sentences.txt','news-sentences.txt', 'blog-sentences.txt']
+    # files =  ['news-sentences.txt', 'blog-sentences.txt']
+    # files = ['blog-sentences.txt']
+    # files = ['news-sentences.txt'] 
+    files = ['example-sentences.txt']
 
     sentences = []
 
@@ -40,7 +43,7 @@ def tag_test_sentences():
                 else:
                     non_disambiguated_count += 1
 
-            # if 'OTH' in word.pos_tags:
+            # if 'NOUN' in word.pos_tags:
             #     print(word)
             # if len(word.pos_tags) > 1:
             #      print(word)
@@ -60,8 +63,11 @@ Extract actual POS tags
 def extract_actual_pos_tags():
     actual_pos_tags = []
 
-    files = ['example-sentences.txt', 'news-sentences.txt', 'blogs-sentences.txt']
-    files = ['news-sentences.txt']
+    # files = ['example-sentences.txt', 'news-sentences.txt', 'blog-sentences.txt']
+    # files =  ['news-sentences.txt', 'blog-sentences.txt']
+    # files = ['blog-sentences.txt']
+    # files = ['news-sentences.txt'] 
+    files = ['example-sentences.txt']
 
     for f in files:
         sentences = read_file('data/test/tagger/output/' + f, strip=True)
@@ -73,7 +79,7 @@ def extract_actual_pos_tags():
             for token in tokens:
                 if token == '/':
                     get_next = True
-
+                
                 if token != '/' and get_next:
                     actual_pos_tags.append(token.upper())
                     get_next = False
@@ -88,5 +94,5 @@ def extract_predicted_pos_tags(words=[]):
     for word in words:
         if len(word.pos_tags) > 0:
             predicted_pos_tags.append(word.pos_tags[0])
-
+        
     return predicted_pos_tags

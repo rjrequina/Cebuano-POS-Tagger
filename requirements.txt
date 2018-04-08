@@ -42,6 +42,7 @@ polyglot==16.7.4
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 pycld2==0.31
+pyenchant==2.0.0
 Pygments==2.2.0
 PyICU==2.0.2
 pytesseract==0.1.8

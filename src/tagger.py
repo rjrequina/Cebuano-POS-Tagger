@@ -7,7 +7,8 @@ from stemmer import stem_word
 import stemmer
 from search import search_term
 from repos import dictionary, prefixes, suffixes, function_words, lexical_rules, contextual_rules
-
+import enchant
+eng_d = enchant.Dict("en_US")
 
 '''
 Given a Cebuano sentence, it will tag all words with its corresponding POS tags
@@ -45,12 +46,15 @@ Assigns all possible POS tags per token
 '''
 def assign_pos_tags(tokens=[]):
     words = []
-    for token in tokens:
+    for idx, token in enumerate(tokens):
         stem = stem_word(word=token)
         word = dictionary_search(word=stem)
         word = function_words_search(word=stem)
         word = apply_lexical_rules_assignment(word=stem)
-        word = apply_capitalization_assignment(word=stem)
+        word = apply_capitalization_assignment(word=stem, pos=idx)
+
+        if token == 'Manglibre':
+            print(word)
 
         if len(word.pos_tags) == 0:
             if stem.text.isdigit():
@@ -58,6 +62,8 @@ def assign_pos_tags(tokens=[]):
                 word.pos_tags = ['NUM']
             elif stem.text in string.punctuation:
                 word.pos_tags = ['SYM']
+            elif eng_d.check(stem.text):
+                word.pos_tags = ['NOUN']
             else:
                 word.pos_tags = ['OTH']
 
@@ -106,6 +112,9 @@ def apply_lexical_rules_assignment(word=None):
     for rule in all_lexical_rules:
         intersection = list(set(word.pos_tags).intersection(rule.base))
 
+        if len(rule.base) == 0:
+            intersection = [1]
+
         # If the word is unknown
         if is_unknown:
             if rule.target not in word.pos_tags:
@@ -138,8 +147,12 @@ def apply_lexical_rules_assignment(word=None):
 '''
 Assign NOUN if capitalized
 '''
-def apply_capitalization_assignment(word=None):
+def apply_capitalization_assignment(word=None, pos=-1):
     if len(word.pos_tags) == 0:
+        if word.orig_text[0].isupper():
+            word.pos_tags = ['NOUN']
+
+    if pos > 0:
         if word.orig_text[0].isupper():
             word.pos_tags = ['NOUN']
 
@@ -276,10 +289,10 @@ def satisfies_condition(rule=None, word=None, words=None, curr_pos=-1):
                 if len(context_word.pos_tags) > 1:
                     return False
                 else:
-                    if condition.pos_tag not in context_word.pos_tags:
+                    if condition.pos_tag not in context_word.pos_tags or condition.pos_tag != context_word.text:
                         return False
             else:
-                if condition.pos_tag not in context_word.pos_tags:
+                if condition.pos_tag not in context_word.pos_tags or condition.pos_tag != context_word.text:
                     return False
 
         else:

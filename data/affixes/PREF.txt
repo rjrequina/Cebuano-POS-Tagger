@@ -6,6 +6,7 @@ tigpa
 pagka
 panag
 manga
+magka
 ting
 tagi
 taga
@@ -25,6 +26,7 @@ hing
 ging
 nihi
 gihi
+nahi
 kada
 tig
 tag
