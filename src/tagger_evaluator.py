@@ -32,28 +32,11 @@ def tag_test_sentences():
     non_disambiguated_count = 0
     num_tokens = 0
     for idx, sentence in enumerate(sentences):
-        sentence_words = tag_sentence(text=sentence)
-        tagged_sentence = ""
-
-        for word in sentence_words:
-            if len(word.pos_tags):
-                num_tokens += 1
-                if len(word.pos_tags) == 1:
-                    disambiguated_count += 1
-                else:
-                    non_disambiguated_count += 1
-
-            # if 'NOUN' in word.pos_tags:
-            #     print(word)
-            # if len(word.pos_tags) > 1:
-            #      print(word)
-            # if len(word.pos_tags):
-            #     tagged_sentence +=  word.stem.word + "/" + word.pos_tags[0] + " "
-            # else:
-            #     tagged_sentence += word.stem.word
-        words += sentence_words
-    print("Number of tokens: " + str(num_tokens) + '\n')
-    print("Disambiguated: " + str((disambiguated_count / float(num_tokens)) * 100) + '% (' + str(disambiguated_count) + ') \n')
+        sentence = tag_sentence(text=sentence)
+        for word in sentence:
+            words.append(word)
+    # print("Number of tokens: " + str(num_tokens) + '\n')
+    # print("Disambiguated: " + str((disambiguated_count / float(num_tokens)) * 100) + '% (' + str(disambiguated_count) + ') \n')
     return words
 
 
@@ -92,7 +75,104 @@ Extract predicted POS tags
 def extract_predicted_pos_tags(words=[]):
     predicted_pos_tags = []
     for word in words:
-        if len(word.pos_tags) > 0:
-            predicted_pos_tags.append(word.pos_tags[0])
+        predicted_pos_tags.append(word[1])
         
     return predicted_pos_tags
+
+
+def confusion_matrix(actual=[], pred=[]):
+    idx = {
+        'ADJ' : 0,
+        'ADV' : 1,
+        'CONJ': 2,
+        'DET' : 3,
+        'NOUN': 4,
+        'NUM' : 5,
+        'OTH' : 6,
+        'PART': 7,
+        'PRON': 8,
+        'SYM' : 9,
+        'VERB': 10
+    }
+
+    matrix = [[0 for i in range(11)] for j in range(11)]
+
+    for i in range(0, len(actual)):
+       matrix[idx[actual[i]]][idx[pred[i]]] += 1
+    
+    return matrix
+
+
+# TP FP FN TN
+def cm_values(matrix=[]):
+    values = [[0 for i in range(4)] for j in range(11)]
+
+    # Extract True Positives
+    for i in range(11):
+        values[i][0] = matrix[i][i]
+    
+    # Extract False Positives
+    for i in range(11):
+        for j in range(11):
+            if i != j:
+                values[i][1] += matrix[j][i]
+
+    # Extract False Negatives
+    for i in range(11):
+        for j in range(11):
+            if i != j:
+                values[i][2] += matrix[i][j]
+    
+    # Extract True Negatives
+    total = 0
+    for i in range(11):
+        for j in range(11):
+            total += matrix[i][j]
+    
+    for i in range(11):
+            values[i][3] = total - (values[i][0] + values[i][1] + values[i][2])
+
+    return values
+
+
+def performance(values=[]):
+    perf = [[0 for i in range(4)] for j in range(11)]
+
+
+    
+    for i in range(11):
+        tp = values[i][0]
+        fp = values[i][1]
+        fn = values[i][2]
+        tn = values[i][3]
+
+        # Get Accuracy
+        # TP + TN / TP + TN + FP + FN
+        # if tp > 0 and tn > 0 and fp > 0 and fn > 0:
+        if (tp + tn + fp + fn) != 0:
+            perf[i][0] = float(tp + tn) / (tp + tn + fp + fn)
+
+        # Get Precision
+        #  TP / TP + FP
+        # if tp > 0 and fp > 0:
+        if (tp + fp) != 0:
+            perf[i][1] = float(tp) / (tp + fp)
+
+        # Get Recall
+        # TP / TP + FN
+        
+        # if tp > 0 and fn > 0:
+        if (tp + fn) != 0:
+            perf[i][2] = float(tp) / (tp + fn)
+
+        # Get Fscore
+        # 2 * ((precision * recall) / (precision + recall))
+        precision = perf[i][1]
+        recall = perf[i][2] 
+
+        # if precision > 0 and recall > 0:
+        if (precision + recall) != 0:
+            perf[i][3] = 2 * (float(precision * recall) / (precision + recall))
+    
+    return perf
+     
