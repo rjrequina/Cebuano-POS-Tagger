@@ -7,8 +7,7 @@ from stemmer import stem_word
 import stemmer
 from search import search_term
 from repos import dictionary, prefixes, suffixes, function_words, lexical_rules, contextual_rules
-import enchant
-eng_d = enchant.Dict("en_US")
+
 
 '''
 Given a Cebuano sentence, it will tag all words with its corresponding POS tags
@@ -18,7 +17,11 @@ def tag_sentence(text=''):
     words = assign_pos_tags(tokens=tokens)
     words = disambiguate_pos_tags(words=words)
 
-    return words
+    sentence = []
+    for word in words:
+        sentence.append((word.orig_text.encode('utf-8'), word.pos_tags[0]))
+
+    return sentence
 
 '''
 Transform sentence to tokens
@@ -47,14 +50,11 @@ Assigns all possible POS tags per token
 def assign_pos_tags(tokens=[]):
     words = []
     for idx, token in enumerate(tokens):
-        stem = stem_word(word=token)
+        stem = stem_word(word=token, as_object=True)
         word = dictionary_search(word=stem)
         word = function_words_search(word=stem)
         word = apply_lexical_rules_assignment(word=stem)
         word = apply_capitalization_assignment(word=stem, pos=idx)
-
-        if token == 'Manglibre':
-            print(word)
 
         if len(word.pos_tags) == 0:
             if stem.text.isdigit():
@@ -62,8 +62,6 @@ def assign_pos_tags(tokens=[]):
                 word.pos_tags = ['NUM']
             elif stem.text in string.punctuation:
                 word.pos_tags = ['SYM']
-            elif eng_d.check(stem.text):
-                word.pos_tags = ['NOUN']
             else:
                 word.pos_tags = ['OTH']
 
@@ -104,7 +102,6 @@ def function_words_search(word=None):
 Assign possible tags helper function: Applying Lexical Rules Assignment
 '''
 def apply_lexical_rules_assignment(word=None):
-    # if not word.is_close:
 
     all_lexical_rules = select_lexical_rules(word=word)
     is_unknown = len(word.pos_tags) == 0
@@ -115,7 +112,6 @@ def apply_lexical_rules_assignment(word=None):
         if len(rule.base) == 0:
             intersection = [1]
 
-        # If the word is unknown
         if is_unknown:
             if rule.target not in word.pos_tags:
                 word.pos_tags.append(rule.target)
@@ -129,19 +125,6 @@ def apply_lexical_rules_assignment(word=None):
                     word.pos_tags = list(set(word.pos_tags))
                     word.derived_tags.append(rule.target)
                     word.derived_tags = list(set(word.derived_tags))
-    #     if rule.target not in word.pos_tags:
-    #         if not is_unknown:
-    #             if len(intersection) == 0:
-    #                 if rule.target not in word.pos_tags:
-    #                     word.pos_tags.append(rule.target)
-    #                     word.derived_tags.append(rule.target)
-    #         else:
-    #             # For unknown words
-    #             if rule.target not in word.pos_tags:
-    #                 word.pos_tags.append(rule.target)
-    #                 word.derived_tags.append(rule.target)
-
-    # word.pos_tags = list(set(word.pos_tags))
     return word
 
 '''
@@ -172,26 +155,10 @@ def disambiguate_pos_tags(words=None):
 Lexical Disambiguation
 '''
 def apply_lexical_disambiguation(words=None):
-    open_tags = ['NOUN', 'ADJ', 'VERB', 'NUM', 'ADV']
-
-    # all_lexical_rules = lexical_rules()
     for word in words:
         retain_tags = []
 
         if len(word.pos_tags) > 1:
-            # Checks if the word is a function word.
-            # If it is, it will remove the open POS tags that belongs to the word
-            # If it isn't, it will remove the closed POS tags
-
-            # if word.is_close:
-            #     word.pos_tags = [item for item in word.pos_tags if item not in open_tags]
-            # else:
-            #     word.pos_tags = [item for item in word.pos_tags if item in open_tags]
-
-
-            # Apply lexical rules for open words only
-            # Words with these POS tags have affixes attach to them
-            # if not word.is_close:
 
             skip = word.prefix and word.infix and word.suffix
 
@@ -203,7 +170,6 @@ def apply_lexical_disambiguation(words=None):
 
 
                 if len(retain_tags) > 0:
-                    orig_tags = word.pos_tags
                     word.pos_tags = []
                     for tag in retain_tags:
                         word.pos_tags.append(tag)
@@ -275,6 +241,7 @@ def get_valid_position(words=None, position=-1, curr_pos=-1):
             return curr_pos
 
     return curr_pos
+
 '''
 Helper function for Contextual Disambiguation
 Checks if the current word meets the contextual conditions of the rule
@@ -327,9 +294,4 @@ def select_contextual_rules(word=None):
     return applicable_contextual_rules
 
 if __name__ == '__main__':
-    tokens = tag_sentence('Ang bata natanggong sa sapa.')
-    sentence = ''
-    for token in tokens:
-        sentence += str(token) + ' '
-
-    print(sentence)
+    pass

@@ -14,7 +14,7 @@ func_words = function_words()
 '''
 Given a word, stems the word and returns the root and affixes of the word
 '''
-def stem_word(word=None):
+def stem_word(word=None, as_object=False):
     if word:
         processes = [
             [],
@@ -49,7 +49,11 @@ def stem_word(word=None):
                 break
 
             temp_stem = deepcopy(stem)
-        return stem
+        
+        if as_object:
+            return stem
+
+        return [stem.root, stem.prefix, stem.infix, stem.suffix]
     return None
 
 '''
@@ -206,9 +210,4 @@ def affix_lookup(stem=None):
 
 
 if __name__ == "__main__":
-    start = int(round(time.time() * 1000))
-    stem = stem_word(word='niadtong')
-    print(stem.root)
-    end = int(round(time.time() * 1000))
-    print(end - start)
     pass
