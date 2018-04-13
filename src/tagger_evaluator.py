@@ -6,12 +6,10 @@ from tagger import tag_sentence
 '''
 Fetches the unlabeled sentences
 '''
-def fetch_unlabeled_sentences():
-    # files = ['example-sentences.txt','news-sentences.txt', 'blog-sentences.txt']
-    # files =  ['news-sentences.txt', 'blog-sentences.txt']
-    # files = ['blog-sentences.txt']
-    # files = ['news-sentences.txt'] 
-    files = ['example-sentences.txt']
+def fetch_unlabeled_sentences(test_all=True, specific=''):
+    files = ['example-sentences.txt','news-sentences.txt', 'blog-sentences.txt']
+    if not test_all:
+        files = [specific]
 
     sentences = []
 
@@ -24,33 +22,26 @@ def fetch_unlabeled_sentences():
 '''
 Tags all the test sentences
 '''
-def tag_test_sentences():
-    sentences = fetch_unlabeled_sentences()
+def tag_test_sentences(test_all=True, specific=''):
+    sentences = fetch_unlabeled_sentences(test_all=test_all, specific=specific)
     words = []
 
-    disambiguated_count = 0
-    non_disambiguated_count = 0
-    num_tokens = 0
-    for idx, sentence in enumerate(sentences):
+    for sentence in sentences:
         sentence = tag_sentence(text=sentence)
         for word in sentence:
             words.append(word)
-    # print("Number of tokens: " + str(num_tokens) + '\n')
-    # print("Disambiguated: " + str((disambiguated_count / float(num_tokens)) * 100) + '% (' + str(disambiguated_count) + ') \n')
     return words
 
 
 '''
 Extract actual POS tags
 '''
-def extract_actual_pos_tags():
+def extract_actual_pos_tags(test_all=True, specific=''):
     actual_pos_tags = []
 
-    # files = ['example-sentences.txt', 'news-sentences.txt', 'blog-sentences.txt']
-    # files =  ['news-sentences.txt', 'blog-sentences.txt']
-    # files = ['blog-sentences.txt']
-    # files = ['news-sentences.txt'] 
-    files = ['example-sentences.txt']
+    files = ['example-sentences.txt', 'news-sentences.txt', 'blog-sentences.txt']
+    if not test_all:
+        files = [specific]
 
     for f in files:
         sentences = read_file('data/test/tagger/output/' + f, strip=True)
@@ -80,6 +71,9 @@ def extract_predicted_pos_tags(words=[]):
     return predicted_pos_tags
 
 
+'''
+Generates confusion matrix
+'''
 def confusion_matrix(actual=[], pred=[]):
     idx = {
         'ADJ' : 0,
@@ -102,8 +96,9 @@ def confusion_matrix(actual=[], pred=[]):
     
     return matrix
 
-
-# TP FP FN TN
+'''
+Gives the TP, FP, FN, TN given a confusion matrix
+'''
 def cm_values(matrix=[]):
     values = [[0 for i in range(4)] for j in range(11)]
 
@@ -133,46 +128,3 @@ def cm_values(matrix=[]):
             values[i][3] = total - (values[i][0] + values[i][1] + values[i][2])
 
     return values
-
-
-def performance(values=[]):
-    perf = [[0 for i in range(4)] for j in range(11)]
-
-
-    
-    for i in range(11):
-        tp = values[i][0]
-        fp = values[i][1]
-        fn = values[i][2]
-        tn = values[i][3]
-
-        # Get Accuracy
-        # TP + TN / TP + TN + FP + FN
-        # if tp > 0 and tn > 0 and fp > 0 and fn > 0:
-        if (tp + tn + fp + fn) != 0:
-            perf[i][0] = float(tp + tn) / (tp + tn + fp + fn)
-
-        # Get Precision
-        #  TP / TP + FP
-        # if tp > 0 and fp > 0:
-        if (tp + fp) != 0:
-            perf[i][1] = float(tp) / (tp + fp)
-
-        # Get Recall
-        # TP / TP + FN
-        
-        # if tp > 0 and fn > 0:
-        if (tp + fn) != 0:
-            perf[i][2] = float(tp) / (tp + fn)
-
-        # Get Fscore
-        # 2 * ((precision * recall) / (precision + recall))
-        precision = perf[i][1]
-        recall = perf[i][2] 
-
-        # if precision > 0 and recall > 0:
-        if (precision + recall) != 0:
-            perf[i][3] = 2 * (float(precision * recall) / (precision + recall))
-    
-    return perf
-     

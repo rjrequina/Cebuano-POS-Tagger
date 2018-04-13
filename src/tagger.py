@@ -1,4 +1,5 @@
 import string
+import nltk
 from polyglot.text import Text
 
 from utilities import read_file, write_file
