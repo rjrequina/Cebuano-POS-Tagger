@@ -90,6 +90,38 @@ def to_panda_data():
      'index': indexes
     }
 
+
+def statistics(df=None):
+    stats = []
+    
+    stats.append(df.count()['is_valid'])
+    stats.append(df[(df.is_valid == True)].count()['is_valid'])
+    stats.append(df[(df.is_valid == False)].count()['is_valid'])
+    stats.append((df[(df.is_valid == True)].count()['is_valid'] / float(df.count()['is_valid'])) * 100)
+    stats.append(df[(df.is_entry == True)].count()['is_entry'])
+    stats.append(df[(df.is_entry == True) & (df.is_valid == True)].count()['is_entry'])
+    stats.append(df[(df.is_entry == True) & (df.is_valid == False)].count()['is_entry'])
+    stats.append(df[(df.is_entry == False)].count()['is_entry'])
+    stats.append(df[(df.is_entry == False) & (df.is_valid == True)].count()['is_entry'])
+    stats.append(df[(df.is_entry == False) & (df.is_valid == False)].count()['is_entry'])
+
+    indices = [
+        'Tokens',
+        'Correct Root',
+        'Incorrect Root',
+        'Correct Root %',
+        'Found Tokens',
+        'Correct Root (Found)',
+        'Incorrect Root (Found)',
+        'Unknown Tokens',
+        'Correct Root (Unknown)',
+        'Incorrect Root (Unknown)'
+    ]
+
+    return {
+        'values': stats,
+        'index': indices
+    }
 if __name__ == '__main__':
     # tokenize()
     # stem_tokens()
