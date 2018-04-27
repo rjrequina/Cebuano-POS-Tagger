@@ -1,0 +1,42 @@
+Tig-dala/NOUN man/PART siya/PRON diri/PART ug/conj mga/DET tnt/NOUN ./SYM
+Siya/NOUN man/PART tig-kuha/NOUN ug/conj visa/NOUN ./SYM
+Pulis/NOUN man/PART kana/PRON siya/PRON mandakop/VERB man/PART kana/PRON siya/PRON ug/conj tnt/NOUN ./SYM
+Yun/PRON kuno/PART ang/DET pinakaluud/ADJ kuno/PART kaayo/ADV tanawon/VERB ./SYM
+Duha/NUM ka/PART electric/NOUN fan/NOUN gamiton/VERB nako/PRON ./SYM
+siya/PRON di/ADV gyud/ADV puydi/ADJ ,/SYM singtanon/ADJ ./SYM
+Silhigan/VERB ni/DET Rosa/NOUN ang/DET kwarto/NOUN ./SYM
+Ilabay/VERB sa/PART bata/NOUN ang/DET basura/NOUN ./SYM
+Si/DET Ruben/NOUN ang/DET magsumbag/VERB kang/DET Lando/NOUN ./SYM
+Mopalit/VERB ako/PRON ug/DET libro/NOUN ./SYM
+Gibaligya/VERB niya/PRON ang/DET iyang/PRON awto/NOUN ./SYM
+Naghatag/VERB ako/PRON ug/DET kwarta/NOUN kaniya/PRON ./SYM
+Para/PART ba/PART kanako/PRON nga/PART ikaw/PRON nagluto/VERB ug/DET saging/NOUN ./SYM
+Akong/PRON gibuak/VERB ang/DET samin/NOUN ./SYM
+Mopalit/VERB ang/DET tawo/NOUN ug/DET libro/NOUN ./SYM
+Makaluto/VERB kog/PRON isda/NOUN ./SYM
+Mipalit/VERB ang/DET tawo/NOUN ug/DET libro/NOUN ./SYM
+Nagbasa/VERB si/DET Juan/NOUN ug/DET libro/NOUN ./SYM
+Palit-on/VERB sa/PART tawo/NOUN ang/DET libro/NOUN ./SYM
+Gi-palit/VERB sa/PART tawo/NOUN ang/DET libro/NOUN ./SYM
+Palitan/VERB sa/PART tawo/NOUN si/DET Ana/NOUN ug/DET libro/NOUN ./SYM
+Gipalitan/VERB sa/PART tawo/NOUN si/DET Ana/NOUN ug/DET libro/NOUN ./SYM
+Ilabay/VERB niya/PRON ang/DET basura/NOUN ./SYM
+Gilabay/VERB niya/PRON ang/DET basura/NOUN ./SYM
+Misulod/VERB dayon/ADV si/DET Juan/NOUN sa/PART tindahan/NOUN ./SYM
+Mosimba/VERB siya/PRON unya/ADV ./SYM
+Gipalit/VERB usa/NUM ni/DET Juan/NOUN ang/DET pan/NOUN ./SYM
+Iputol/VERB niya/PRON ang/DET gabas/NOUN sa/PART kahoy/NOUN ./SYM
+Hugas-an/VERB nimo/PRON ang/DET banyo/NOUN ./SYM
+Gipatay/VERB siya/PRON sa/PART usa/NUM ka/PART kabaw/NOUN ./SYM
+Miadto/VERB si/DET Juan/NOUN sa/PART kwarto/NOUN ug/CONJ gipatay/VERB ang/DET tawo/NOUN ./SYM
+Ako/PRON ang/DET libro/NOUN ./SYM
+Imo/PRON ang/DET kwarto/NOUN ./SYM
+Magdala/VERB si/DET Tony/NOUN ug/DET bulak/NOUN para/PART ni/DET Alice/NOUN ./SYM
+Naghatod/VERB ang/DET imong/PRON katabang/NOUN nimo/PRON dinhi/PART ./SYM
+Maayo/ADJ ang/DET balita/NOUN nga/PART gibasa/VERB sa/PART lalaki/NOUN ./SYM
+Pila/NOUN ra/ADV man/PART say/ADV ihatag/VERB ?/SYM
+Bisag/ADV pila/PRON pa/PART ka/PART electric/NOUN fan/NOUN ang/DET ibutang/VERB nimo/PRON ./SYM
+Ganahan/VERB gyud/ADV ko/PRON ana/PRON nga/PART restaurant-a/NOUN ay/PART pero/CONJ mahal/ADJ mga/PART pagkaon/NOUN dira/ADV ./SYM
+Usahay/ADV naa/VERB to/ADV siyay/PRON pagka-Taiwanese/NOUN pero/CONJ karon/ADV naanad/VERB ko/PRON ,/SYM bootan/ADJ man/PART siya/PRON ./SYM
+Ayaw/VERB daota/VERB imong/PRON career/NOUN ,/SYM imong/PRON pagka-presidente/NOUN ./SYM
+Naghinay-hinay/VERB lang/ADV kini/PRON sa/PART pagdagan/VERB aron/CONJ lang/ADV maka-abot/VERB ngadto/PART sa/PART ilang/PRON padulngan/NOUN ./SYM

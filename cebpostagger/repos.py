@@ -1,45 +1,6 @@
 from utilities import read_file, write_file
 from wrappers import LexicalRule, ContextualRule, ContextCondition
 
-
-'''
-Fetch dictionary
-'''
-def dictionary():
-	return read_file('data/dict/cebposdict.txt', dict_format=True, strip=True)
-
-'''
-Fetch prefixes
-'''
-def prefixes():
-	return read_file('data/affixes/PREF.txt', strip=True)
-
-'''
-Fetch suffixes
-'''
-def suffixes():
-	return read_file('data/affixes/SUFF.txt', strip=True)
-
-'''
-Fetch function words
-'''
-def function_words():
-	tags = ['CONJ', 'DET', 'PART', 'PRON']
-	function_words = {}
-
-	for tag in tags:
-		words = read_file('data/function_words/' + tag + '.txt', strip=True)
-
-		for word in words:
-			if word not in function_words:
-				function_words[word] = [tag]
-			else:
-				function_words[word].append(tag)
-
-		# function_words += words
-
-	return function_words
-
 '''
 Fetch lexical rules
 '''

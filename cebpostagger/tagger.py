@@ -1,13 +1,12 @@
 import string
-import nltk
-from polyglot.text import Text
+# from polyglot.text import Text
+from nltk.tokenize import word_tokenize
+from cebdict import dictionary
+from cebstemmer import stemmer
 
 from utilities import read_file, write_file
 from wrappers import Word
-from stemmer import stem_word
-import stemmer
-from search import search_term
-from repos import dictionary, prefixes, suffixes, function_words, lexical_rules, contextual_rules
+from repos import  lexical_rules, contextual_rules
 
 
 '''
@@ -28,20 +27,21 @@ def tag_sentence(text=''):
 Transform sentence to tokens
 '''
 def tokenize(text=''):
-    tokens = list(Text(text).words)
-    result = []
-    get_next = False
-    for token in tokens:
-        if token == '-':
-            result[-1] = result[-1] + token
-            get_next = True
-        elif token != '-' and get_next:
-            result[-1] = result[-1] + token
-            get_next = False
-        else:
-            result.append(token)
+    # tokens = list(Text(text).words)
+    return word_tokenize(text.strip())
+    # result = []
+    # get_next = False
+    # for token in tokens:
+    #     if token == '-':
+    #         result[-1] = result[-1] + token
+    #         get_next = True
+    #     elif token != '-' and get_next:
+    #         result[-1] = result[-1] + token
+    #         get_next = False
+    #     else:
+    #         result.append(token)
 
-    return result
+    # return result
 
 
 '''
@@ -51,9 +51,9 @@ Assigns all possible POS tags per token
 def assign_pos_tags(tokens=[]):
     words = []
     for idx, token in enumerate(tokens):
-        stem = stem_word(word=token, as_object=True)
+        stem = stemmer.stem_word(word=token, as_object=True)
         word = dictionary_search(word=stem)
-        word = function_words_search(word=stem)
+        #word = function_words_search(word=stem)
         word = apply_lexical_rules_assignment(word=stem)
         word = apply_capitalization_assignment(word=stem, pos=idx)
 
@@ -75,10 +75,9 @@ Assign possible tags helper function: Dictionary Search
 '''
 def dictionary_search(word=None):
     if word.is_entry:
-        pos_tags = search_term(entries=stemmer.entries, term=word.root)
+        # pos_tags = search_term(entries=stemmer.entries, term=word.root)
+        pos_tags = dictionary.search(word.root)
         if pos_tags:
-            pos_tags = [tag for tag in pos_tags if tag != 'OTH']
-            pos_tags = ['PART' if tag == 'PREP' else tag for tag in pos_tags]
             word.pos_tags = pos_tags
             word.root_tags = word.pos_tags
 
@@ -88,15 +87,15 @@ def dictionary_search(word=None):
 '''
 Assign possible tags helper function: Function Word Search
 '''
-def function_words_search(word=None):
-    entry = word.root.lower().replace('o', 'u')
-    entry = entry.replace('e', 'i')
+# def function_words_search(word=None):
+#     entry = word.root.lower().replace('o', 'u')
+#     entry = entry.replace('e', 'i')
 
-    if entry in function_words():
-        word.pos_tags += function_words()[entry]
-        word.pos_tags = list(set(word.pos_tags))
+#     if entry in function_words():
+#         word.pos_tags += function_words()[entry]
+#         word.pos_tags = list(set(word.pos_tags))
 
-    return word
+#     return word
 
 
 '''
