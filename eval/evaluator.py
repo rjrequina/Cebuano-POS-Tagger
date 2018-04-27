@@ -1,7 +1,7 @@
 from nltk.tokenize import word_tokenize
 from utilities import read_file, write_file
-from wrappers import Word
-from tagger import tag_sentence
+from cebpostagger.tagger import tag_sentence
+import string
 
 '''
 Fetches the unlabeled sentences
@@ -47,16 +47,11 @@ def extract_actual_pos_tags(test_all=True, specific=''):
         sentences = read_file('data/test/output/' + f, strip=True)
 
         for sentence in sentences:
-            tokens = word_tokenize(sentence)
-
-            get_next = False
+            tokens = sentence.split(' ')
             for token in tokens:
-                if token == '/':
-                    get_next = True
-                
-                if token != '/' and get_next:
-                    actual_pos_tags.append(token.upper())
-                    get_next = False
+                l = token.split('/')
+                actual_pos_tags.append(l[1].upper())
+
     return actual_pos_tags
 
 
