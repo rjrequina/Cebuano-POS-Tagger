@@ -1,7 +1,7 @@
 Kung/CONJ hilig/ADJ ka/PRON og/DET food/NOUN trip/NOUN ug/CONJ laag/NOUN ,/SYM adunay/VERB usa/NUM ka/PART food/NOUN court/NOUN sud/PART sa/PART usa/NUM ka/PART mall/NOUN sa/PART dakbayan/NOUN sa/PART Mandaue/NOUN nga/PART angayan/ADJ nimong/PRON bisitahon/VERB ./SYM 
 Si/DET Kiko/NOUN adunay/VERB usa/NUM ka/PART iro/NOUN ./SYM 
 Blacky/NOUN ang/DET ngalan/NOUN sa/PART iyang/PRON iro/NOUN ./SYM 
-Itom/ADJ ang/DET kolor/NOUN sa/PART iyang/PRON balahibo/NOUN ,/SYM tambokon/ADJ ,/SYM abtikon/ADJ ,/SYM ug/CONJ buotan/ADJ ./SYM 
+Itom/ADJ ang/DET kolor/NOUN sa/PART iyang/PRON balahibo/NOUN ,/SYM tambokon/ADJ ,/SYM abtikon/ADJ ,/SYM ug/CONJ buotan/ADJ ./SYM
 Kada/ADV sayo/ADV sa/PART buntag/NOUN kon/CONJ way/ADJ klase/NOUN ,/SYM moadto/VERB si/DET Kiko/NOUN sa/PART ilang/PRON humayan/NOUN ug/CONJ mouban/VERB gayod/ADV kini/PRON si/DET Blacky/NOUN kay/CONJ motabang/VERB man/PART pagpamugaw/NOUN sa/PART mga/PART langgam/NOUN nga/PART mangaon/VERB sa/PART mga/PART bunga/NOUN sa/PART ilang/PRON humayan/NOUN ./SYM 
 Usa/NUM ka/PART buntag/NOUN niana/PART ,/SYM samtang/CONJ padulong/VERB na/ADV si/DET Kiko/NOUN ug/CONJ ang/DET iyang/PRON iro/NOUN pauli/VERB sa/PART ilang/PRON balay/NOUN ,/SYM nakakita/VERB si/DET Blacky/NOUN ug/DET duha/NUM ka/PART dako/ADJ nga/PART halas/NOUN nga/PART mipadulong/VERB na/ADV ni/DET Kiko/NOUN ./SYM 
 Unsa/PRON ang/DET gibuhat/VERB ni/DET Blacky/NOUN ,/SYM miaw/VERB aw/VERB kini/PRON pagkusog/NOUN nga/PART naglantaw/VERB sa/PART duha/NUM ka/PART halas/NOUN ./SYM 
@@ -30,7 +30,7 @@ Karon/ADV duna/VERB pa/ADV gani/ADV 27/NUM ug/CONJ morag/ADV 19/NUM ang/DET labi
 Ang/DET ni-trend/VERB nga/PART unli/NOUN siomai/NOUN ,/SYM gidagsa/VERB sa/PART mahiligon/NOUN og/DET siomai/NOUN ingon/VERB man/PART katong/PRON nakuryuso/VERB usab/ADV nga/PART motilaw/VERB ./SYM 
 Ilhado/ADJ ang/DET siomai/NOUN sa/PART Barangay/NOUN Tisa/NOUN apan/CONJ una/ADV ang/DET managsuong/NOUN Nadera/NOUN nga/PART niabli/VERB sa/PART unli/NOUN siomai/NOUN ./SYM 
 Nagpangamay/VERB na/ADV ang/DET puti/ADJ nga/PART mga/PART bas/NOUN ,/SYM limpyo/ADJ nga/PART dagat/NOUN ug/CONJ ubang/PART mga/PART dapit/NOUN nga/PART sarang/ADJ imong/PRON malingawan/VERB ./SYM 
-Di/ADV makawang/ADJ ang/DET imong/PRON ba­­­kas­­­yon/NOUN kon/CONJ anaa/PART ka/PRON sa/PART Santa/NOUN Fe/NOUN kay/CONJ adunay/VERB daghang/ADJ beach/NOUN resorts/NOUN nga/PART kaestahan/NOUN ./SYM 
+Di/ADV makawang/ADJ ang/DET imong/PRON bakasyon/NOUN kon/CONJ anaa/PART ka/PRON sa/PART Santa/NOUN Fe/NOUN kay/CONJ adunay/VERB daghang/ADJ beach/NOUN resorts/NOUN nga/PART kaestahan/NOUN ./SYM 
 Anaa/VERB usab/ADV ang/DET matahom/ADJ nga/PART Virgin/NOUN Island/NOUN ,/SYM ang/DET Balidbid/VERB Lagoon/NOUN ,/SYM ang/DET Laaw/ADJ sa/PART Kinatarkan/NOUN Island/NOUN diin/ADV ang/DET daghang/ADJ lato/NOUN ug/CONJ pwede/ADJ nga/PART anihon/VERB ./SYM 
 Gikasab-an/VERB siya/PRON sa/PART iyang/PRON asawa/NOUN kay/CONJ mas/PART dako/ADJ unta/ADV siyag/PRON ma-save/VERB kon/CONJ taxi/VERB pay/ADV iyang/PRON gigukod/VERB ./SYM 
 Sobra/ADV kaabubhoan/ADJ si/DET Minda/NOUN ./SYM 
