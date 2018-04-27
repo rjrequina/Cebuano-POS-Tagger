@@ -11,5 +11,5 @@ setup(
   download_url = 'https://github.com/ajrequina/Cebuano-POS-Tagger/archive/1.0.tar.gz',
   keywords = ['pos-tagger', 'cebuano-pos-tagger'],
   classifiers = [],
-  install_requires=['cebstemmer']
+  install_requires=['cebstemmer', 'nltk']
 )
