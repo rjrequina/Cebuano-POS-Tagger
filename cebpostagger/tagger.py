@@ -468,21 +468,16 @@ def tag_sentence(text=''):
 Transform sentence to tokens
 '''
 def tokenize(text=''):
-    # tokens = list(Text(text).words)
-    return word_tokenize(text.strip())
-    # result = []
-    # get_next = False
-    # for token in tokens:
-    #     if token == '-':
-    #         result[-1] = result[-1] + token
-    #         get_next = True
-    #     elif token != '-' and get_next:
-    #         result[-1] = result[-1] + token
-    #         get_next = False
-    #     else:
-    #         result.append(token)
+    ltokens = text.strip().split()
+    tokens = []
+    for lk in ltokens:
+        if lk[-1] in string.punctuation:
+            tokens.append(lk[:-1])
+            tokens.append(lk[-1])
+        else:
+            tokens.append(lk)
 
-    # return result
+    return tokens
 
 
 '''
@@ -494,12 +489,12 @@ def assign_pos_tags(tokens=[]):
     for idx, token in enumerate(tokens):
         stem = stemmer.stem_word(word=token, as_object=True)
         word = dictionary_search(word=stem)
-        #word = function_words_search(word=stem)
         word = apply_lexical_rules_assignment(word=stem)
         word = apply_capitalization_assignment(word=stem, pos=idx)
 
         if len(word.pos_tags) == 0:
-            if stem.text.isdigit():
+
+            if any(i.isdigit() for i in stem.text):
                 # Assign num if the word is a numerical value
                 word.pos_tags = ['NUM']
             elif stem.text in string.punctuation:
